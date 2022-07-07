@@ -3,7 +3,7 @@ apply plugin: 'org.springframework.boot'
 dependencies {
     compile('org.springframework.boot:spring-boot-starter')
     compile('net.devh:grpc-server-spring-boot-starter')
-    compile('my-example:my-grpc-interface')
+    compile('com.almeidavc:')
 }
 
 buildscript {
