@@ -1,13 +1,25 @@
 package com.almeidavc.grpcbackend.lib;
 
 import static io.grpc.MethodDescriptor.generateFullMethodName;
+import static io.grpc.stub.ClientCalls.asyncBidiStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncClientStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncServerStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncUnaryCall;
+import static io.grpc.stub.ClientCalls.blockingServerStreamingCall;
+import static io.grpc.stub.ClientCalls.blockingUnaryCall;
+import static io.grpc.stub.ClientCalls.futureUnaryCall;
+import static io.grpc.stub.ServerCalls.asyncBidiStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncClientStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncServerStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncUnaryCall;
+import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
 /**
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.42.1)",
+    value = "by gRPC proto compiler (version 1.31.1)",
     comments = "Source: hospital.proto")
-@io.grpc.stub.annotations.GrpcGenerated
 public final class HospitalServiceGrpc {
 
   private HospitalServiceGrpc() {}
@@ -160,42 +172,42 @@ public final class HospitalServiceGrpc {
      */
     public void createHospital(com.almeidavc.grpcbackend.lib.CreateHospitalRequest request,
         io.grpc.stub.StreamObserver<com.almeidavc.grpcbackend.lib.Hospital> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getCreateHospitalMethod(), responseObserver);
+      asyncUnimplementedUnaryCall(getCreateHospitalMethod(), responseObserver);
     }
 
     /**
      */
     public void updateHospital(com.almeidavc.grpcbackend.lib.UpdateHospitalRequest request,
         io.grpc.stub.StreamObserver<com.almeidavc.grpcbackend.lib.Hospital> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpdateHospitalMethod(), responseObserver);
+      asyncUnimplementedUnaryCall(getUpdateHospitalMethod(), responseObserver);
     }
 
     /**
      */
     public void deleteHospital(com.almeidavc.grpcbackend.lib.DeleteHospitalRequest request,
         io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDeleteHospitalMethod(), responseObserver);
+      asyncUnimplementedUnaryCall(getDeleteHospitalMethod(), responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
             getCreateHospitalMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
+            asyncUnaryCall(
               new MethodHandlers<
                 com.almeidavc.grpcbackend.lib.CreateHospitalRequest,
                 com.almeidavc.grpcbackend.lib.Hospital>(
                   this, METHODID_CREATE_HOSPITAL)))
           .addMethod(
             getUpdateHospitalMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
+            asyncUnaryCall(
               new MethodHandlers<
                 com.almeidavc.grpcbackend.lib.UpdateHospitalRequest,
                 com.almeidavc.grpcbackend.lib.Hospital>(
                   this, METHODID_UPDATE_HOSPITAL)))
           .addMethod(
             getDeleteHospitalMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
+            asyncUnaryCall(
               new MethodHandlers<
                 com.almeidavc.grpcbackend.lib.DeleteHospitalRequest,
                 com.google.protobuf.Empty>(
@@ -222,7 +234,7 @@ public final class HospitalServiceGrpc {
      */
     public void createHospital(com.almeidavc.grpcbackend.lib.CreateHospitalRequest request,
         io.grpc.stub.StreamObserver<com.almeidavc.grpcbackend.lib.Hospital> responseObserver) {
-      io.grpc.stub.ClientCalls.asyncUnaryCall(
+      asyncUnaryCall(
           getChannel().newCall(getCreateHospitalMethod(), getCallOptions()), request, responseObserver);
     }
 
@@ -230,7 +242,7 @@ public final class HospitalServiceGrpc {
      */
     public void updateHospital(com.almeidavc.grpcbackend.lib.UpdateHospitalRequest request,
         io.grpc.stub.StreamObserver<com.almeidavc.grpcbackend.lib.Hospital> responseObserver) {
-      io.grpc.stub.ClientCalls.asyncUnaryCall(
+      asyncUnaryCall(
           getChannel().newCall(getUpdateHospitalMethod(), getCallOptions()), request, responseObserver);
     }
 
@@ -238,7 +250,7 @@ public final class HospitalServiceGrpc {
      */
     public void deleteHospital(com.almeidavc.grpcbackend.lib.DeleteHospitalRequest request,
         io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
-      io.grpc.stub.ClientCalls.asyncUnaryCall(
+      asyncUnaryCall(
           getChannel().newCall(getDeleteHospitalMethod(), getCallOptions()), request, responseObserver);
     }
   }
@@ -260,21 +272,21 @@ public final class HospitalServiceGrpc {
     /**
      */
     public com.almeidavc.grpcbackend.lib.Hospital createHospital(com.almeidavc.grpcbackend.lib.CreateHospitalRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+      return blockingUnaryCall(
           getChannel(), getCreateHospitalMethod(), getCallOptions(), request);
     }
 
     /**
      */
     public com.almeidavc.grpcbackend.lib.Hospital updateHospital(com.almeidavc.grpcbackend.lib.UpdateHospitalRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+      return blockingUnaryCall(
           getChannel(), getUpdateHospitalMethod(), getCallOptions(), request);
     }
 
     /**
      */
     public com.google.protobuf.Empty deleteHospital(com.almeidavc.grpcbackend.lib.DeleteHospitalRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+      return blockingUnaryCall(
           getChannel(), getDeleteHospitalMethod(), getCallOptions(), request);
     }
   }
@@ -297,7 +309,7 @@ public final class HospitalServiceGrpc {
      */
     public com.google.common.util.concurrent.ListenableFuture<com.almeidavc.grpcbackend.lib.Hospital> createHospital(
         com.almeidavc.grpcbackend.lib.CreateHospitalRequest request) {
-      return io.grpc.stub.ClientCalls.futureUnaryCall(
+      return futureUnaryCall(
           getChannel().newCall(getCreateHospitalMethod(), getCallOptions()), request);
     }
 
@@ -305,7 +317,7 @@ public final class HospitalServiceGrpc {
      */
     public com.google.common.util.concurrent.ListenableFuture<com.almeidavc.grpcbackend.lib.Hospital> updateHospital(
         com.almeidavc.grpcbackend.lib.UpdateHospitalRequest request) {
-      return io.grpc.stub.ClientCalls.futureUnaryCall(
+      return futureUnaryCall(
           getChannel().newCall(getUpdateHospitalMethod(), getCallOptions()), request);
     }
 
@@ -313,7 +325,7 @@ public final class HospitalServiceGrpc {
      */
     public com.google.common.util.concurrent.ListenableFuture<com.google.protobuf.Empty> deleteHospital(
         com.almeidavc.grpcbackend.lib.DeleteHospitalRequest request) {
-      return io.grpc.stub.ClientCalls.futureUnaryCall(
+      return futureUnaryCall(
           getChannel().newCall(getDeleteHospitalMethod(), getCallOptions()), request);
     }
   }

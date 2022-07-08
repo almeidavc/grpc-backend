@@ -1,0 +1,13 @@
+#!/bin/bash
+
+grpcurl --plaintext -d \
+'{"hospital": {"id": 1, "title": "updatedTitle", "address": "updatedAddress"}, "update_mask": {"paths": "title"}}' \
+localhost:9090 com.almeidavc.grpcbackend.HospitalService/UpdateHospital
+
+grpcurl --plaintext -d \
+'{"hospital": {"id": 1, "title": "updatedTitle", "address": "updatedAddress"}, "update_mask": {"paths": "title", "paths": "address"}}' \
+localhost:9090 com.almeidavc.grpcbackend.HospitalService/UpdateHospital
+
+grpcurl --plaintext -d \
+'{"hospital": {"id": 1, "title": "noMaskTitle", "address": "noMaskAddress"}}' \
+localhost:9090 com.almeidavc.grpcbackend.HospitalService/UpdateHospital

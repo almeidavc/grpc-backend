@@ -1,13 +1,25 @@
 package com.almeidavc.grpcbackend.lib;
 
 import static io.grpc.MethodDescriptor.generateFullMethodName;
+import static io.grpc.stub.ClientCalls.asyncBidiStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncClientStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncServerStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncUnaryCall;
+import static io.grpc.stub.ClientCalls.blockingServerStreamingCall;
+import static io.grpc.stub.ClientCalls.blockingUnaryCall;
+import static io.grpc.stub.ClientCalls.futureUnaryCall;
+import static io.grpc.stub.ServerCalls.asyncBidiStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncClientStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncServerStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncUnaryCall;
+import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
 /**
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.42.1)",
+    value = "by gRPC proto compiler (version 1.31.1)",
     comments = "Source: patient.proto")
-@io.grpc.stub.annotations.GrpcGenerated
 public final class PatientServiceGrpc {
 
   private PatientServiceGrpc() {}
@@ -160,42 +172,42 @@ public final class PatientServiceGrpc {
      */
     public void createPatient(com.almeidavc.grpcbackend.lib.CreatePatientRequest request,
         io.grpc.stub.StreamObserver<com.almeidavc.grpcbackend.lib.Patient> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getCreatePatientMethod(), responseObserver);
+      asyncUnimplementedUnaryCall(getCreatePatientMethod(), responseObserver);
     }
 
     /**
      */
     public void updatePatient(com.almeidavc.grpcbackend.lib.UpdatePatientRequest request,
         io.grpc.stub.StreamObserver<com.almeidavc.grpcbackend.lib.Patient> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpdatePatientMethod(), responseObserver);
+      asyncUnimplementedUnaryCall(getUpdatePatientMethod(), responseObserver);
     }
 
     /**
      */
     public void deletePatient(com.almeidavc.grpcbackend.lib.DeletePatientRequest request,
         io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDeletePatientMethod(), responseObserver);
+      asyncUnimplementedUnaryCall(getDeletePatientMethod(), responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
             getCreatePatientMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
+            asyncUnaryCall(
               new MethodHandlers<
                 com.almeidavc.grpcbackend.lib.CreatePatientRequest,
                 com.almeidavc.grpcbackend.lib.Patient>(
                   this, METHODID_CREATE_PATIENT)))
           .addMethod(
             getUpdatePatientMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
+            asyncUnaryCall(
               new MethodHandlers<
                 com.almeidavc.grpcbackend.lib.UpdatePatientRequest,
                 com.almeidavc.grpcbackend.lib.Patient>(
                   this, METHODID_UPDATE_PATIENT)))
           .addMethod(
             getDeletePatientMethod(),
-            io.grpc.stub.ServerCalls.asyncUnaryCall(
+            asyncUnaryCall(
               new MethodHandlers<
                 com.almeidavc.grpcbackend.lib.DeletePatientRequest,
                 com.google.protobuf.Empty>(
@@ -222,7 +234,7 @@ public final class PatientServiceGrpc {
      */
     public void createPatient(com.almeidavc.grpcbackend.lib.CreatePatientRequest request,
         io.grpc.stub.StreamObserver<com.almeidavc.grpcbackend.lib.Patient> responseObserver) {
-      io.grpc.stub.ClientCalls.asyncUnaryCall(
+      asyncUnaryCall(
           getChannel().newCall(getCreatePatientMethod(), getCallOptions()), request, responseObserver);
     }
 
@@ -230,7 +242,7 @@ public final class PatientServiceGrpc {
      */
     public void updatePatient(com.almeidavc.grpcbackend.lib.UpdatePatientRequest request,
         io.grpc.stub.StreamObserver<com.almeidavc.grpcbackend.lib.Patient> responseObserver) {
-      io.grpc.stub.ClientCalls.asyncUnaryCall(
+      asyncUnaryCall(
           getChannel().newCall(getUpdatePatientMethod(), getCallOptions()), request, responseObserver);
     }
 
@@ -238,7 +250,7 @@ public final class PatientServiceGrpc {
      */
     public void deletePatient(com.almeidavc.grpcbackend.lib.DeletePatientRequest request,
         io.grpc.stub.StreamObserver<com.google.protobuf.Empty> responseObserver) {
-      io.grpc.stub.ClientCalls.asyncUnaryCall(
+      asyncUnaryCall(
           getChannel().newCall(getDeletePatientMethod(), getCallOptions()), request, responseObserver);
     }
   }
@@ -260,21 +272,21 @@ public final class PatientServiceGrpc {
     /**
      */
     public com.almeidavc.grpcbackend.lib.Patient createPatient(com.almeidavc.grpcbackend.lib.CreatePatientRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+      return blockingUnaryCall(
           getChannel(), getCreatePatientMethod(), getCallOptions(), request);
     }
 
     /**
      */
     public com.almeidavc.grpcbackend.lib.Patient updatePatient(com.almeidavc.grpcbackend.lib.UpdatePatientRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+      return blockingUnaryCall(
           getChannel(), getUpdatePatientMethod(), getCallOptions(), request);
     }
 
     /**
      */
     public com.google.protobuf.Empty deletePatient(com.almeidavc.grpcbackend.lib.DeletePatientRequest request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+      return blockingUnaryCall(
           getChannel(), getDeletePatientMethod(), getCallOptions(), request);
     }
   }
@@ -297,7 +309,7 @@ public final class PatientServiceGrpc {
      */
     public com.google.common.util.concurrent.ListenableFuture<com.almeidavc.grpcbackend.lib.Patient> createPatient(
         com.almeidavc.grpcbackend.lib.CreatePatientRequest request) {
-      return io.grpc.stub.ClientCalls.futureUnaryCall(
+      return futureUnaryCall(
           getChannel().newCall(getCreatePatientMethod(), getCallOptions()), request);
     }
 
@@ -305,7 +317,7 @@ public final class PatientServiceGrpc {
      */
     public com.google.common.util.concurrent.ListenableFuture<com.almeidavc.grpcbackend.lib.Patient> updatePatient(
         com.almeidavc.grpcbackend.lib.UpdatePatientRequest request) {
-      return io.grpc.stub.ClientCalls.futureUnaryCall(
+      return futureUnaryCall(
           getChannel().newCall(getUpdatePatientMethod(), getCallOptions()), request);
     }
 
@@ -313,7 +325,7 @@ public final class PatientServiceGrpc {
      */
     public com.google.common.util.concurrent.ListenableFuture<com.google.protobuf.Empty> deletePatient(
         com.almeidavc.grpcbackend.lib.DeletePatientRequest request) {
-      return io.grpc.stub.ClientCalls.futureUnaryCall(
+      return futureUnaryCall(
           getChannel().newCall(getDeletePatientMethod(), getCallOptions()), request);
     }
   }
