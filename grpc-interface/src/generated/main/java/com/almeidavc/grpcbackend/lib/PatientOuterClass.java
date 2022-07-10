@@ -45,25 +45,27 @@ public final class PatientOuterClass {
     java.lang.String[] descriptorData = {
       "\n\rpatient.proto\022\031com.almeidavc.grpcbacke" +
       "nd\032\033google/protobuf/empty.proto\032 google/" +
-      "protobuf/field_mask.proto\"W\n\007Patient\022\n\n\002" +
+      "protobuf/field_mask.proto\"r\n\007Patient\022\n\n\002" +
       "id\030\001 \001(\003\022\022\n\nfirst_name\030\002 \001(\t\022\021\n\tlast_nam" +
-      "e\030\003 \001(\t\022\031\n\021medical_condition\030\004 \001(\t\"p\n\024Cr" +
-      "eatePatientRequest\022\032\n\022patient_first_name" +
-      "\030\001 \001(\t\022\031\n\021patient_last_name\030\002 \001(\t\022!\n\031pat" +
-      "ient_medical_condition\030\003 \001(\t\"|\n\024UpdatePa" +
-      "tientRequest\0223\n\007patient\030\001 \001(\0132\".com.alme" +
-      "idavc.grpcbackend.Patient\022/\n\013update_mask" +
-      "\030\002 \001(\0132\032.google.protobuf.FieldMask\"*\n\024De" +
-      "letePatientRequest\022\022\n\npatient_id\030\001 \001(\0032\266" +
-      "\002\n\016PatientService\022d\n\rCreatePatient\022/.com" +
-      ".almeidavc.grpcbackend.CreatePatientRequ" +
-      "est\032\".com.almeidavc.grpcbackend.Patient\022" +
-      "d\n\rUpdatePatient\022/.com.almeidavc.grpcbac" +
-      "kend.UpdatePatientRequest\032\".com.almeidav" +
-      "c.grpcbackend.Patient\022X\n\rDeletePatient\022/" +
-      ".com.almeidavc.grpcbackend.DeletePatient" +
-      "Request\032\026.google.protobuf.EmptyB!\n\035com.a" +
-      "lmeidavc.grpcbackend.libP\001b\006proto3"
+      "e\030\003 \001(\t\022\031\n\021medical_condition\030\004 \001(\t\022\031\n\021me" +
+      "dical_treatment\030\005 \001(\t\"\223\001\n\024CreatePatientR" +
+      "equest\022\032\n\022patient_first_name\030\001 \001(\t\022\031\n\021pa" +
+      "tient_last_name\030\002 \001(\t\022!\n\031patient_medical" +
+      "_condition\030\003 \001(\t\022!\n\031patient_medical_trea" +
+      "tment\030\004 \001(\t\"|\n\024UpdatePatientRequest\0223\n\007p" +
+      "atient\030\001 \001(\0132\".com.almeidavc.grpcbackend" +
+      ".Patient\022/\n\013update_mask\030\002 \001(\0132\032.google.p" +
+      "rotobuf.FieldMask\"*\n\024DeletePatientReques" +
+      "t\022\022\n\npatient_id\030\001 \001(\0032\266\002\n\016PatientService" +
+      "\022d\n\rCreatePatient\022/.com.almeidavc.grpcba" +
+      "ckend.CreatePatientRequest\032\".com.almeida" +
+      "vc.grpcbackend.Patient\022d\n\rUpdatePatient\022" +
+      "/.com.almeidavc.grpcbackend.UpdatePatien" +
+      "tRequest\032\".com.almeidavc.grpcbackend.Pat" +
+      "ient\022X\n\rDeletePatient\022/.com.almeidavc.gr" +
+      "pcbackend.DeletePatientRequest\032\026.google." +
+      "protobuf.EmptyB!\n\035com.almeidavc.grpcback" +
+      "end.libP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -76,13 +78,13 @@ public final class PatientOuterClass {
     internal_static_com_almeidavc_grpcbackend_Patient_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_almeidavc_grpcbackend_Patient_descriptor,
-        new java.lang.String[] { "Id", "FirstName", "LastName", "MedicalCondition", });
+        new java.lang.String[] { "Id", "FirstName", "LastName", "MedicalCondition", "MedicalTreatment", });
     internal_static_com_almeidavc_grpcbackend_CreatePatientRequest_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_almeidavc_grpcbackend_CreatePatientRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_almeidavc_grpcbackend_CreatePatientRequest_descriptor,
-        new java.lang.String[] { "PatientFirstName", "PatientLastName", "PatientMedicalCondition", });
+        new java.lang.String[] { "PatientFirstName", "PatientLastName", "PatientMedicalCondition", "PatientMedicalTreatment", });
     internal_static_com_almeidavc_grpcbackend_UpdatePatientRequest_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_almeidavc_grpcbackend_UpdatePatientRequest_fieldAccessorTable = new

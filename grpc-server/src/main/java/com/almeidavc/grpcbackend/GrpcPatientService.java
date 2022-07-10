@@ -27,7 +27,8 @@ public class GrpcPatientService extends PatientServiceGrpc.PatientServiceImplBas
                 .save(new PatientEntity(
                         request.getPatientFirstName(),
                         request.getPatientLastName(),
-                        request.getPatientMedicalCondition()));
+                        request.getPatientMedicalCondition(),
+                        request.getPatientMedicalTreatment()));
 
         Patient reply = patientEntity.mapToGrpcInterface();
         responseObserver.onNext(reply);
@@ -52,12 +53,16 @@ public class GrpcPatientService extends PatientServiceGrpc.PatientServiceImplBas
                     case "medical_condition":
                         patientEntity.setMedicalCondition(patient.getMedicalCondition());
                         break;
+                    case "medical_treatment":
+                        patientEntity.setMedicalTreatment(patient.getMedicalTreatment());
+                        break;
                 }
             }
         } else {
             patientEntity.setFirstName(patient.getFirstName());
             patientEntity.setLastName(patient.getLastName());
             patientEntity.setMedicalCondition(patient.getMedicalCondition());
+            patientEntity.setMedicalTreatment(patient.getMedicalTreatment());
         }
 
         patientRepository.save(patientEntity);

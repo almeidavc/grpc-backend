@@ -19,6 +19,7 @@ private static final long serialVersionUID = 0L;
     firstName_ = "";
     lastName_ = "";
     medicalCondition_ = "";
+    medicalTreatment_ = "";
   }
 
   @java.lang.Override
@@ -72,6 +73,12 @@ private static final long serialVersionUID = 0L;
             java.lang.String s = input.readStringRequireUtf8();
 
             medicalCondition_ = s;
+            break;
+          }
+          case 42: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            medicalTreatment_ = s;
             break;
           }
           default: {
@@ -231,6 +238,44 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int MEDICAL_TREATMENT_FIELD_NUMBER = 5;
+  private volatile java.lang.Object medicalTreatment_;
+  /**
+   * <code>string medical_treatment = 5;</code>
+   * @return The medicalTreatment.
+   */
+  @java.lang.Override
+  public java.lang.String getMedicalTreatment() {
+    java.lang.Object ref = medicalTreatment_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      medicalTreatment_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string medical_treatment = 5;</code>
+   * @return The bytes for medicalTreatment.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getMedicalTreatmentBytes() {
+    java.lang.Object ref = medicalTreatment_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      medicalTreatment_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -257,6 +302,9 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(medicalCondition_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 4, medicalCondition_);
     }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(medicalTreatment_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 5, medicalTreatment_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -278,6 +326,9 @@ private static final long serialVersionUID = 0L;
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(medicalCondition_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, medicalCondition_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(medicalTreatment_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, medicalTreatment_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -302,6 +353,8 @@ private static final long serialVersionUID = 0L;
         .equals(other.getLastName())) return false;
     if (!getMedicalCondition()
         .equals(other.getMedicalCondition())) return false;
+    if (!getMedicalTreatment()
+        .equals(other.getMedicalTreatment())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -322,6 +375,8 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getLastName().hashCode();
     hash = (37 * hash) + MEDICAL_CONDITION_FIELD_NUMBER;
     hash = (53 * hash) + getMedicalCondition().hashCode();
+    hash = (37 * hash) + MEDICAL_TREATMENT_FIELD_NUMBER;
+    hash = (53 * hash) + getMedicalTreatment().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -463,6 +518,8 @@ private static final long serialVersionUID = 0L;
 
       medicalCondition_ = "";
 
+      medicalTreatment_ = "";
+
       return this;
     }
 
@@ -493,6 +550,7 @@ private static final long serialVersionUID = 0L;
       result.firstName_ = firstName_;
       result.lastName_ = lastName_;
       result.medicalCondition_ = medicalCondition_;
+      result.medicalTreatment_ = medicalTreatment_;
       onBuilt();
       return result;
     }
@@ -554,6 +612,10 @@ private static final long serialVersionUID = 0L;
       }
       if (!other.getMedicalCondition().isEmpty()) {
         medicalCondition_ = other.medicalCondition_;
+        onChanged();
+      }
+      if (!other.getMedicalTreatment().isEmpty()) {
+        medicalTreatment_ = other.medicalTreatment_;
         onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
@@ -840,6 +902,82 @@ private static final long serialVersionUID = 0L;
   checkByteStringIsUtf8(value);
       
       medicalCondition_ = value;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object medicalTreatment_ = "";
+    /**
+     * <code>string medical_treatment = 5;</code>
+     * @return The medicalTreatment.
+     */
+    public java.lang.String getMedicalTreatment() {
+      java.lang.Object ref = medicalTreatment_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        medicalTreatment_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string medical_treatment = 5;</code>
+     * @return The bytes for medicalTreatment.
+     */
+    public com.google.protobuf.ByteString
+        getMedicalTreatmentBytes() {
+      java.lang.Object ref = medicalTreatment_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        medicalTreatment_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string medical_treatment = 5;</code>
+     * @param value The medicalTreatment to set.
+     * @return This builder for chaining.
+     */
+    public Builder setMedicalTreatment(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      medicalTreatment_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string medical_treatment = 5;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearMedicalTreatment() {
+      
+      medicalTreatment_ = getDefaultInstance().getMedicalTreatment();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string medical_treatment = 5;</code>
+     * @param value The bytes for medicalTreatment to set.
+     * @return This builder for chaining.
+     */
+    public Builder setMedicalTreatmentBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      medicalTreatment_ = value;
       onChanged();
       return this;
     }

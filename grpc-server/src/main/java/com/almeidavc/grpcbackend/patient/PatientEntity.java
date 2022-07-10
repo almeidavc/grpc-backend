@@ -13,7 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import com.almeidavc.grpcbackend.lib.Hospital;
 import com.almeidavc.grpcbackend.lib.Patient;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -26,6 +25,7 @@ public class PatientEntity {
     private String firstName;
     private String lastName;
     private String medicalCondition;
+    private String medicalTreatment;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "patients_hospitals",
@@ -35,10 +35,11 @@ public class PatientEntity {
 
     protected PatientEntity() {}
 
-    public PatientEntity(String firstName, String lastName, String medicalCondition) {
+    public PatientEntity(String firstName, String lastName, String medicalCondition, String medicalTreatment) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.medicalCondition = medicalCondition;
+        this.medicalTreatment = medicalTreatment;
     }
 
     public Patient mapToGrpcInterface() {
@@ -47,6 +48,7 @@ public class PatientEntity {
                 .setFirstName(firstName)
                 .setLastName(lastName)
                 .setMedicalCondition(medicalCondition)
+                .setMedicalTreatment(medicalTreatment)
                 .build();
     }
 
@@ -84,6 +86,14 @@ public class PatientEntity {
 
     public void setMedicalCondition(String medicalCondition) {
         this.medicalCondition = medicalCondition;
+    }
+
+    public String getMedicalTreatment() {
+        return medicalTreatment;
+    }
+
+    public void setMedicalTreatment(String medicalTreatment) {
+        this.medicalTreatment = medicalTreatment;
     }
 
     public Set<HospitalEntity> getHospitals() {

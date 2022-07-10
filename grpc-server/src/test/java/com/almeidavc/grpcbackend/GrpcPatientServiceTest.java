@@ -1,7 +1,5 @@
 package com.almeidavc.grpcbackend;
 
-import com.almeidavc.grpcbackend.hospital.HospitalEntity;
-import com.almeidavc.grpcbackend.hospital.HospitalRepository;
 import com.almeidavc.grpcbackend.patient.PatientEntity;
 import com.almeidavc.grpcbackend.patient.PatientRepository;
 import com.almeidavc.grpcbackend.lib.Patient;
@@ -41,6 +39,7 @@ public class GrpcPatientServiceTest {
                 .setPatientFirstName("John")
                 .setPatientLastName("Adams")
                 .setPatientMedicalCondition("cancer")
+                .setPatientMedicalTreatment("chemotherapy")
                 .build();
         StreamRecorder<Patient> responseObserver = StreamRecorder.create();
         grpcPatientService.createPatient(request, responseObserver);
@@ -54,6 +53,7 @@ public class GrpcPatientServiceTest {
         assertEquals("John", response.getFirstName());
         assertEquals("Adams", response.getLastName());
         assertEquals("cancer", response.getMedicalCondition());
+        assertEquals("chemotherapy", response.getMedicalTreatment());
 
         // assert that entry was created
         assertEquals(1, patientRepository.findAll().size());
@@ -63,10 +63,7 @@ public class GrpcPatientServiceTest {
     public void testUpdatePatientNoMask() throws Exception {
         // add entry to patient table that will be updated
         PatientEntity patientEntity = patientRepository
-                .save(new PatientEntity("John", "Adams", "cancer"));
-        assertEquals("John", patientEntity.getFirstName());
-        assertEquals("Adams", patientEntity.getLastName());
-        assertEquals("cancer", patientEntity.getMedicalCondition());
+                .save(new PatientEntity("John", "Adams", "cancer", "chemotherapy"));
 
         // update entry
         Patient patient = Patient.newBuilder()
@@ -74,6 +71,7 @@ public class GrpcPatientServiceTest {
                 .setFirstName("newFirstName")
                 .setLastName("newLastName")
                 .setMedicalCondition("newCancer")
+                .setMedicalTreatment("newTreatment")
                 .build();
         UpdatePatientRequest request = UpdatePatientRequest.newBuilder()
                 .setPatient(patient)
@@ -90,16 +88,14 @@ public class GrpcPatientServiceTest {
         assertEquals("newFirstName", response.getFirstName());
         assertEquals("newLastName", response.getLastName());
         assertEquals("newCancer", response.getMedicalCondition());
+        assertEquals("newTreatment", response.getMedicalTreatment());
     }
 
     @Test
     public void testUpdatePatientWithMask() throws Exception {
         // add entry to patient table that will be updated
         PatientEntity patientEntity = patientRepository
-                .save(new PatientEntity("John", "Adams", "cancer"));
-        assertEquals("John", patientEntity.getFirstName());
-        assertEquals("Adams", patientEntity.getLastName());
-        assertEquals("cancer", patientEntity.getMedicalCondition());
+                .save(new PatientEntity("John", "Adams", "cancer", "chemotherapy"));
 
         // update entry
         Patient patient = Patient.newBuilder()
@@ -107,6 +103,7 @@ public class GrpcPatientServiceTest {
                 .setFirstName("newFirstName")
                 .setLastName("newLastName")
                 .setMedicalCondition("newCancer")
+                .setMedicalTreatment("newTreatment")
                 .build();
         FieldMask updateMask = FieldMask.newBuilder()
                 .addPaths("medical_condition")
@@ -127,6 +124,7 @@ public class GrpcPatientServiceTest {
         assertEquals("John", response.getFirstName());
         assertEquals("Adams", response.getLastName());
         assertEquals("newCancer", response.getMedicalCondition());
+        assertEquals("chemotherapy", response.getMedicalTreatment());
     }
 
     @Test
@@ -136,7 +134,7 @@ public class GrpcPatientServiceTest {
 
         // add entry to patient table
         PatientEntity patientEntity = patientRepository
-                .save(new PatientEntity("John", "Adams", "cancer"));
+                .save(new PatientEntity("John", "Adams", "cancer", "chemotherapy"));
 
         // delete newly added patient entry
         DeletePatientRequest request = DeletePatientRequest.newBuilder()

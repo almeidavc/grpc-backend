@@ -48,4 +48,16 @@ public interface PatientOrBuilder extends
    */
   com.google.protobuf.ByteString
       getMedicalConditionBytes();
+
+  /**
+   * <code>string medical_treatment = 5;</code>
+   * @return The medicalTreatment.
+   */
+  java.lang.String getMedicalTreatment();
+  /**
+   * <code>string medical_treatment = 5;</code>
+   * @return The bytes for medicalTreatment.
+   */
+  com.google.protobuf.ByteString
+      getMedicalTreatmentBytes();
 }

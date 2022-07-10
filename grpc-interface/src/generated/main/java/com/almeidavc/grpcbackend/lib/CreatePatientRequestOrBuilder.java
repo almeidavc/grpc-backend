@@ -42,4 +42,16 @@ public interface CreatePatientRequestOrBuilder extends
    */
   com.google.protobuf.ByteString
       getPatientMedicalConditionBytes();
+
+  /**
+   * <code>string patient_medical_treatment = 4;</code>
+   * @return The patientMedicalTreatment.
+   */
+  java.lang.String getPatientMedicalTreatment();
+  /**
+   * <code>string patient_medical_treatment = 4;</code>
+   * @return The bytes for patientMedicalTreatment.
+   */
+  com.google.protobuf.ByteString
+      getPatientMedicalTreatmentBytes();
 }

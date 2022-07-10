@@ -21,9 +21,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class GrpcPatientHospitalRelationshipServiceTest {
     static final String[][] PATIENTS_TEST_DATA = {
-            {"john", "adams", "cancer"},
-            {"sophia", "smith", "cancer"},
-            {"tyler", "brown", "cancer"}
+            {"john", "adams", "cancer", "chemotherapy"},
+            {"sophia", "smith", "cancer", "chemotherapy"},
+            {"tyler", "brown", "cancer", "chemotherapy"}
     };
 
     static final String[][] HOSPITALS_TEST_DATA = {
@@ -52,7 +52,7 @@ public class GrpcPatientHospitalRelationshipServiceTest {
     @Test
     public void testRegisterPatientInHospital() throws Exception {
         // setup
-        PatientEntity patientEntity = patientRepository.save(new PatientEntity("john", "adams", "cancer"));
+        PatientEntity patientEntity = patientRepository.save(new PatientEntity("john", "adams", "cancer", "chemotherapy"));
         HospitalEntity hospitalEntity = hospitalRepository.save(new HospitalEntity("h1", "example address 400"));
 
         // test grpc service method
@@ -82,15 +82,10 @@ public class GrpcPatientHospitalRelationshipServiceTest {
         HospitalEntity hospitalEntity = hospitalRepository.save(new HospitalEntity("h1", "example address 400"));
         Set<Patient> patients = new HashSet<>();
         for (String[] patientData : PATIENTS_TEST_DATA) {
-            PatientEntity patientEntity = patientRepository.save(new PatientEntity(patientData[0], patientData[1], patientData[2]));
+            PatientEntity patientEntity = patientRepository.save(new PatientEntity(patientData[0], patientData[1], patientData[2], patientData[3]));
             patientEntity.getHospitals().add(hospitalEntity);
             patientEntity = patientRepository.save(patientEntity);
-            patients.add(Patient.newBuilder()
-                    .setId(patientEntity.getId())
-                    .setFirstName(patientEntity.getFirstName())
-                    .setLastName(patientEntity.getLastName())
-                    .setMedicalCondition(patientEntity.getMedicalCondition())
-                    .build());
+            patients.add(patientEntity.mapToGrpcInterface());
         }
 
         // test grpc service method
@@ -115,7 +110,7 @@ public class GrpcPatientHospitalRelationshipServiceTest {
     @Test
     public void testListHospitalsByPatient() throws Exception {
         // setup
-        PatientEntity patientEntity = patientRepository.save(new PatientEntity("john", "adams", "cancer"));
+        PatientEntity patientEntity = patientRepository.save(new PatientEntity("john", "adams", "cancer", "chemotherapy"));
         Set<HospitalEntity> hospitalEntities = new HashSet<>();
         for (String[] hospitalData : HOSPITALS_TEST_DATA) {
             HospitalEntity hospitalEntity = hospitalRepository.save(new HospitalEntity(hospitalData[0], hospitalData[1]));
@@ -156,7 +151,7 @@ public class GrpcPatientHospitalRelationshipServiceTest {
     @Test
     public void testPatientIsNotDeletedIfHospitalIsDeleted() throws Exception {
         // setup
-        PatientEntity patientEntity = patientRepository.save(new PatientEntity("john", "adams", "cancer"));
+        PatientEntity patientEntity = patientRepository.save(new PatientEntity("john", "adams", "cancer", "chemotherapy"));
         HospitalEntity hospitalEntity = hospitalRepository.save(new HospitalEntity("h1", "example address 400"));
         patientEntity.getHospitals().add(hospitalEntity);
         patientRepository.save(patientEntity);
@@ -175,7 +170,7 @@ public class GrpcPatientHospitalRelationshipServiceTest {
     @Test
     public void testHospitalIsNotDeletedIfPatientIsDeleted() throws Exception {
         // setup
-        PatientEntity patientEntity = patientRepository.save(new PatientEntity("john", "adams", "cancer"));
+        PatientEntity patientEntity = patientRepository.save(new PatientEntity("john", "adams", "cancer", "chemotherapy"));
         HospitalEntity hospitalEntity = hospitalRepository.save(new HospitalEntity("h1", "example address 400"));
         patientEntity.getHospitals().add(hospitalEntity);
         patientRepository.save(patientEntity);
