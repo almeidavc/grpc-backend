@@ -1,0 +1,6 @@
+#!/bin/bash
+
+grpcurl --plaintext -d \
+"{\"hospital_id\": \"$1\"}" \
+localhost:9090 com.almeidavc.grpcbackend.PatientHospitalRelationshipService/ListPatientsByHospital
+

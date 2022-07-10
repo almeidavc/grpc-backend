@@ -34,6 +34,9 @@ public class GrpcPatientServiceTest {
 
     @Test
     public void testCreatePatient() throws Exception {
+        // no entries in the patient table at first
+        assertEquals(0, patientRepository.findAll().size());
+
         CreatePatientRequest request = CreatePatientRequest.newBuilder()
                 .setPatientFirstName("John")
                 .setPatientLastName("Adams")
@@ -51,6 +54,9 @@ public class GrpcPatientServiceTest {
         assertEquals("John", response.getFirstName());
         assertEquals("Adams", response.getLastName());
         assertEquals("cancer", response.getMedicalCondition());
+
+        // assert that entry was created
+        assertEquals(1, patientRepository.findAll().size());
     }
 
     @Test
@@ -143,6 +149,10 @@ public class GrpcPatientServiceTest {
         }
         assertNull(responseObserver.getError());
         List<Empty> results = responseObserver.getValues();
-        assertEquals(0, results.size());
+        assertEquals(1, results.size());
+        assertEquals(Empty.newBuilder().build(), results.get(0));
+
+        // assert that entry was deleted
+        assertEquals(0, patientRepository.findAll().size());
     }
 }

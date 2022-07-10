@@ -2,6 +2,7 @@ package com.almeidavc.grpcbackend;
 
 import com.almeidavc.grpcbackend.hospital.HospitalEntity;
 import com.almeidavc.grpcbackend.hospital.HospitalRepository;
+import com.almeidavc.grpcbackend.hospital.HospitalService;
 import com.almeidavc.grpcbackend.lib.Hospital;
 import com.almeidavc.grpcbackend.lib.HospitalServiceGrpc;
 import com.almeidavc.grpcbackend.lib.CreateHospitalRequest;
@@ -17,17 +18,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class GrpcHospitalService extends HospitalServiceGrpc.HospitalServiceImplBase {
     @Autowired
     private HospitalRepository hospitalRepository;
+    @Autowired
+    private HospitalService hospitalService;
 
     @Override
     public void createHospital(CreateHospitalRequest request, StreamObserver<Hospital> responseObserver) {
         HospitalEntity hospitalEntity = hospitalRepository
                 .save(new HospitalEntity(request.getHospitalTitle(), request.getHospitalAddress()));
 
-        Hospital reply = Hospital.newBuilder()
-                .setId(hospitalEntity.getId())
-                .setTitle(hospitalEntity.getTitle())
-                .setAddress(hospitalEntity.getAddress())
-                .build();
+        Hospital reply = hospitalEntity.mapToGrpcInterface();
         responseObserver.onNext(reply);
         responseObserver.onCompleted();
     }
@@ -56,18 +55,15 @@ public class GrpcHospitalService extends HospitalServiceGrpc.HospitalServiceImpl
 
         hospitalRepository.save(hospitalEntity);
 
-        Hospital reply = Hospital.newBuilder()
-                .setId(hospitalEntity.getId())
-                .setTitle(hospitalEntity.getTitle())
-                .setAddress(hospitalEntity.getAddress())
-                .build();
+        Hospital reply = hospitalEntity.mapToGrpcInterface();
         responseObserver.onNext(reply);
         responseObserver.onCompleted();
     }
 
     @Override
     public void deleteHospital(DeleteHospitalRequest request, StreamObserver<Empty> responseObserver) {
-        hospitalRepository.deleteById(request.getHospitalId());
+        hospitalService.deleteHospitalById(request.getHospitalId());
+        responseObserver.onNext(Empty.newBuilder().build());
         responseObserver.onCompleted();
     }
 }

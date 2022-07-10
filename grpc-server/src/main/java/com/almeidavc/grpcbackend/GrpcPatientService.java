@@ -1,6 +1,5 @@
 package com.almeidavc.grpcbackend;
 
-import com.almeidavc.grpcbackend.hospital.HospitalEntity;
 import com.almeidavc.grpcbackend.patient.PatientEntity;
 import com.almeidavc.grpcbackend.patient.PatientRepository;
 import com.almeidavc.grpcbackend.lib.Patient;
@@ -9,6 +8,7 @@ import com.almeidavc.grpcbackend.lib.CreatePatientRequest;
 import com.almeidavc.grpcbackend.lib.UpdatePatientRequest;
 import com.almeidavc.grpcbackend.lib.DeletePatientRequest;
 
+import com.almeidavc.grpcbackend.patient.PatientService;
 import com.google.protobuf.Empty;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
@@ -18,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class GrpcPatientService extends PatientServiceGrpc.PatientServiceImplBase {
     @Autowired
     private PatientRepository patientRepository;
+    @Autowired
+    private PatientService patientService;
 
     @Override
     public void createPatient(CreatePatientRequest request, StreamObserver<Patient> responseObserver) {
@@ -25,15 +27,9 @@ public class GrpcPatientService extends PatientServiceGrpc.PatientServiceImplBas
                 .save(new PatientEntity(
                         request.getPatientFirstName(),
                         request.getPatientLastName(),
-                        request.getPatientMedicalCondition()
-                ));
+                        request.getPatientMedicalCondition()));
 
-        Patient reply = Patient.newBuilder()
-                .setId(patientEntity.getId())
-                .setFirstName(patientEntity.getFirstName())
-                .setLastName(patientEntity.getLastName())
-                .setMedicalCondition(patientEntity.getMedicalCondition())
-                .build();
+        Patient reply = patientEntity.mapToGrpcInterface();
         responseObserver.onNext(reply);
         responseObserver.onCompleted();
     }
@@ -66,19 +62,15 @@ public class GrpcPatientService extends PatientServiceGrpc.PatientServiceImplBas
 
         patientRepository.save(patientEntity);
 
-        Patient reply = Patient.newBuilder()
-                .setId(patientEntity.getId())
-                .setFirstName(patientEntity.getFirstName())
-                .setLastName(patientEntity.getLastName())
-                .setMedicalCondition(patientEntity.getMedicalCondition())
-                .build();
+        Patient reply = patientEntity.mapToGrpcInterface();
         responseObserver.onNext(reply);
         responseObserver.onCompleted();
     }
 
     @Override
     public void deletePatient(DeletePatientRequest request, StreamObserver<Empty> responseObserver) {
-        patientRepository.deleteById(request.getPatientId());
+        patientService.deletePatientById(request.getPatientId());
+        responseObserver.onNext(Empty.newBuilder().build());
         responseObserver.onCompleted();
     }
 }

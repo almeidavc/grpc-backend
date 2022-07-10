@@ -1,0 +1,6 @@
+#!/bin/bash
+
+grpcurl --plaintext -d \
+'{"hospital_title": "h1", "hospital_address": "example address 404"}' \
+localhost:9090 com.almeidavc.grpcbackend.HospitalService/CreateHospital
+

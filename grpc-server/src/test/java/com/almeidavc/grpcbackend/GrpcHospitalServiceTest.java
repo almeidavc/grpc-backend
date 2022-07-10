@@ -32,6 +32,9 @@ public class GrpcHospitalServiceTest {
 
     @Test
     public void testCreateHospital() throws Exception {
+        // no entries in the hospital table at first
+        assertEquals(0, hospitalRepository.findAll().size());
+
         CreateHospitalRequest request = CreateHospitalRequest.newBuilder()
                 .setHospitalTitle("h1")
                 .setHospitalAddress("test address 404")
@@ -47,6 +50,9 @@ public class GrpcHospitalServiceTest {
         Hospital response = results.get(0);
         assertEquals("h1", response.getTitle());
         assertEquals("test address 404", response.getAddress());
+
+        // assert that entry was created
+        assertEquals(1, hospitalRepository.findAll().size());
     }
 
     @Test
@@ -133,6 +139,10 @@ public class GrpcHospitalServiceTest {
         }
         assertNull(responseObserver.getError());
         List<Empty> results = responseObserver.getValues();
-        assertEquals(0, results.size());
+        assertEquals(1, results.size());
+        assertEquals(Empty.newBuilder().build(), results.get(0));
+
+        // assert that entry was deleted
+        assertEquals(0, hospitalRepository.findAll().size());
     }
 }

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+grpcurl --plaintext -d \
+'{"patient_first_name": "john", "patient_last_name": "adams", "patient_medical_condition": "cancer"}' \
+localhost:9090 com.almeidavc.grpcbackend.PatientService/CreatePatient
+
+grpcurl --plaintext -d \
+'{"patient_first_name": "sophia", "patient_last_name": "smith", "patient_medical_condition": "cancer"}' \
+localhost:9090 com.almeidavc.grpcbackend.PatientService/CreatePatient
+
+grpcurl --plaintext -d \
+'{"patient_first_name": "tyler", "patient_last_name": "brown", "patient_medical_condition": "cancer"}' \
+localhost:9090 com.almeidavc.grpcbackend.PatientService/CreatePatient
+
